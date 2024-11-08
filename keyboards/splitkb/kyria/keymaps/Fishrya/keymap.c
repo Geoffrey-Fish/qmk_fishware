@@ -59,8 +59,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_vou] = LAYOUT(
     KC_ESC,  DE_V, DE_DOT, DE_O,    DE_U,    DE_ADIA,                                             DE_Q,   DE_G,      DE_L, DE_H, DE_F, DE_J,
     KC_TAB,  DE_C, DE_A,   DE_E,    DE_I,    DE_Y,                                                DE_B,   DE_T,      DE_R, DE_N, DE_S, LT(_Nerd,KC_MINS),
-    KC_LSFT, DE_Z, DE_X,   DE_COMM, DE_ODIA, DE_UDIA, TT(_NUMP), XXXXXXX,   DF(_Game), TT(_FKEY), DE_P,   DE_D,      DE_W, DE_M, DE_K, KC_RSFT,
-                           QK_LOCK, KC_LALT, KC_LGUI, KC_LCTL,   KC_SPC,    KC_ENT,    KC_BSPC,   KC_DEL, TT(_Light),DF(_opy)
+    KC_LSFT, DE_Z, DE_X,   DE_COMM, DE_ODIA, DE_UDIA, TT(_NUMP), XXXXXXX,   TG(_Game), TT(_FKEY), DE_P,   DE_D,      DE_W, DE_M, DE_K, KC_RSFT,
+                           QK_LOCK, KC_LALT, KC_LGUI, KC_LCTL,   KC_SPC,    KC_ENT,    KC_BSPC,   KC_DEL, TT(_Light),TG(_opy)
     ),
 /* Nerd
  * ,-----------------------------------------------.                                              ,-----------------------------------------------.
@@ -145,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_Game] = LAYOUT(
     KC_ESC,  DE_Q,   DE_W, DE_E,    DE_R,    DE_T, 				                                     DE_Y,   DE_U,    DE_I,    DE_O,   DE_P,    DE_UDIA,
     KC_TAB,  DE_A,   DE_S, DE_D,    DE_F,    DE_G, 				                                     DE_H,   DE_J,    DE_K,    DE_L,   DE_ODIA, DE_ADIA,
-    KC_LSFT, DE_Z,   DE_X, DE_C,    DE_V,    DE_B,    TT(_NUMP), SHOT,          DF(_vou), TT(_FKEY), DE_N,   DE_M,    DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
+    KC_LSFT, DE_Z,   DE_X, DE_C,    DE_V,    DE_B,    TT(_NUMP), SHOT,          KC_TRNS, TT(_FKEY), DE_N,   DE_M,    DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
                            QK_LOCK, KC_LALT, KC_LGUI, KC_LCTL,   KC_SPC,        KC_ENT,   KC_BSPC,   KC_DEL, TT(_Light),XXXXXXX
     ),
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(_navi),       DE_Q,        DE_Z,        DE_O,        DE_P,    DE_Y,                                           DE_W,    DE_C,   DE_M,        DE_V,          DE_X,         MO(_navi),
     TD(TD_COM_SEM), LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_U,                                           DE_D,    DE_T,   CTL_T(DE_N), ALT_T(DE_S),   LT(_nr,DE_R), TD(TD_DOT_COL),
     XXXXXXX,        LT(_fn,DE_J), DE_ODIA,     DE_ADIA,     DE_K,    DE_UDIA, KC_COPY, KC_PASTE,   SHOT,    XXXXXXX, DE_B,    DE_G,   DE_L,        TD(TD_SZ_DOL), LT(_fn,DE_F), XXXXXXX,
-                                               QK_LOCK,     KC_LGUI, KC_ESC,  KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC,  KC_BSPC, KC_DEL, DF(_vou)
+                                               QK_LOCK,     KC_LGUI, KC_ESC,  KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC,  KC_BSPC, KC_DEL, KC_TRNS
     ),
 /*number and symbols layer
  * ,-----------------------------------------.                                                     ,-----------------------------------------.
@@ -409,6 +409,7 @@ static void masterOled(void) {
     oled_write_P(PSTR("Fishrya"), false);
     oled_set_cursor(0, 1);
     oled_write("Layer: ",false);
+    oled_set_cursor(0,3);
     switch (get_highest_layer(layer_state)) {
         case _vou:
             oled_write_P(PSTR("vou"), false);
@@ -443,13 +444,13 @@ static void masterOled(void) {
         default:
         break;
     }
-    oled_set_cursor(0, 2);
+    oled_set_cursor(0, 4);
     led_t led_state = host_keyboard_led_state();
     oled_write_ln_P(led_state.caps_lock   ? PSTR("CAPSLOCK ") : PSTR(""), false);
-    oled_set_cursor(0,3);
+    oled_set_cursor(0,5);
     oled_write("WPM: ", false);
+    oled_set_cursor(0,6);
     oled_write(get_u8_str(get_current_wpm(), ' '), false);
-    oled_set_cursor(0,4);
 }
 
 static void slaveOled(void) {
