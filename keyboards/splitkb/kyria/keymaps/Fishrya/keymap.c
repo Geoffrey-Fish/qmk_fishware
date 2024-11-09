@@ -36,8 +36,8 @@ enum custom_keycodes {
 
 //Tap Dances
 enum TapDances{
-    TD_DOT_COL,
     TD_COM_SEM,
+    TD_DOT_COL,
     TD_SZ_DOL,
     TD_EXC_QUE,
     TD_MIN_LOW
@@ -204,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,-----------------------------------------------.                                           ,-------------------------------------------.
   * |VALUP  |SATUP  |HUEUP  |SPEEDUP|RGBNXT |RGB IO |                                           | laut |  F7  |  F8  |  F9  | F10  |  SHRUG |
   * |-------+-------+-------+-------+-------+-------|                                           |------+------+------+------+------+--------|
-  * |VALDWN |SATDWN |HUEDWN |SPEEDWN|RGBLST |XXXXXXX|                                           | mute |  F4  |  F5  |  F6  | F11  |   FLIP |
+  * |VALDWN |SATDWN |HUEDWN |SPEEDWN|RGBLST |       |                                           | mute |  F4  |  F5  |  F6  | F11  |   FLIP |
   * |-------+-------+-------+-------+-------+-------+-------------.               ,-------------+------+------+------+------+------+--------|
   * |       |       |       |       |       |       |      |      |               |      |ZOMBIE| leise|  F1  |  F2  |  F3  | F12  | LENNYF |
   * `-----------------------+-------+-------+-------+------+------|               |------+------+------+------+------+----------------------'
@@ -222,8 +222,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //@formatter:on
 //Tap Dances
 tap_dance_action_t tap_dance_actions[]={
-    [TD_DOT_COL] = ACTION_TAP_DANCE_DOUBLE(DE_COMM,DE_SCLN),
-    [TD_COM_SEM] = ACTION_TAP_DANCE_DOUBLE(DE_DOT,DE_COLN),
+    [TD_COM_SEM] = ACTION_TAP_DANCE_DOUBLE(DE_COMM,DE_SCLN),
+    [TD_DOT_COL] = ACTION_TAP_DANCE_DOUBLE(DE_DOT,DE_COLN),
     [TD_SZ_DOL] = ACTION_TAP_DANCE_DOUBLE(KC_MINS,KC_DLR),
     [TD_EXC_QUE] = ACTION_TAP_DANCE_DOUBLE(DE_EXLM,DE_QUES),
     [TD_MIN_LOW] = ACTION_TAP_DANCE_DOUBLE(DE_MINS,DE_UNDS)
