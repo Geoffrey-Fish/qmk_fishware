@@ -170,17 +170,17 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-------+-------+-------+-------+-------+-------|                                            |-------+-------+-------+-------+-------+-------|
  * |  , ;  |(NR) H |(ALT)A |(CTRL)E|   I   |   U   |                                            |   D   |   T   |(CTRL)N|(ALT)S |(NR) R |  . :  |
  * |-------+-------+-------+-------+-------+-------+-------.                            ,-------+-------+-------+-------+-------+-------+-------|
- * |       |(FN)J  |   Ö   |   Ä   |   K   |   Ü   | PASTE |                            | VOU   |   B   |   G   |   L   |  ß $  |(FN) F |       |
+ * |  COPY |(FN)J  |   Ö   |   Ä   |   K   |   Ü   | PASTE |                            | VOU   |   B   |   G   |   L   |  ß $  |(FN) F | PASTE |
  * `---------------+-------+-------+-------+-------+-------|                            |-------+-------+-------+-------+-------+---------------'
- *                 |  LOCK |  META |  ESC  |C/SHIFT|   TAB |                     .:,;       | ENTER | SPACE |  BSPC |   DEL |       |
+ *                 |  LOCK |  META |  ESC  |C/SHIFT|   TAB |                            | ENTER | SPACE |  BSPC |   DEL | SHOT  |
  *                 `---------------------------------------'                            `---------------------------------------'
  */
     [_opy] = LAYOUT(
     KC_ESC,          DE_1,        DE_2,        DE_3,        DE_4,   DE_5,                         DE_6,   DE_7,    DE_8,        DE_9,          DE_0,         TG(_Game),
     MO(_navi),       DE_Q,        DE_Z,        DE_O,        DE_P,   DE_Y,                         DE_W,   DE_C,    DE_M,        DE_V,          DE_X,         MO(_navi),
     TD(TD_COM_SEM), LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,   DE_U,                         DE_D,   DE_T,    CTL_T(DE_N), ALT_T(DE_S),   LT(_nr,DE_R), TD(TD_DOT_COL),
-    XXXXXXX,        LT(_fn,DE_J), DE_ODIA,     DE_ADIA,     DE_K,   DE_UDIA, XXXXXXX,    KC_TRNS ,DE_B,   DE_G,    DE_L,        TD(TD_SZ_DOL), LT(_fn,DE_F), XXXXXXX,
-                                  QK_LOCK,     KC_LGUI,     KC_ESC, KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC, KC_BSPC, KC_DEL,      XXXXXXX
+    KC_COPY,        LT(_fn,DE_J), DE_ODIA,     DE_ADIA,     DE_K,   DE_UDIA, XXXXXXX,    KC_TRNS ,DE_B,   DE_G,    DE_L,        TD(TD_SZ_DOL), LT(_fn,DE_F), KC_PASTE,
+                                  QK_LOCK,     KC_LGUI,     KC_ESC, KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC, KC_BSPC, KC_DEL,      SHOT
     ),
 /*number and symbols layer
  * ,-----------------------------------------.                                                ,-----------------------------------------.
@@ -190,7 +190,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                                                |------+------+------+------+------+------|
  * |   "  |   \  |   /  |  (   |   )  |   >  |                                                |  - _ |   4  |  5   |   6  |   =  |   &  |
  * |------+------+------+------+------+------+------.                                  ,------+------+------+------+------+------+------|
- * |   '  |  #   |   ~  |   [  |   ]  |  ! ? |      |                                  |      |   +  |   1  |  2   |   3  |   0  |      |
+ * |   '  |  #   |   ~  |   [  |   ]  |  ! ? |      |                                  |      |   +  |   1  |  2   |   3  |   0  |  NUM |
  * `--------------------+------+------+------+------|                                  |------+------+------+------+------+-------------'
  *               |      |      |      |      |      |                                  |      |      |      |      |      |
  *               `----------------------------------'                                  `----------------------------------'
@@ -199,7 +199,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     UC(UHR), UC(HI1), UC(HI2), UC(HI3), UC(QLA), UC(QRA),                               UC(CEDL),       UC(OEFFL), UC(AEFFL), DE_GRV, DE_ACUT, DE_CIRC,
     DE_AT,   DE_PIPE, UC(EUR), DE_LCBR, DE_RCBR, DE_LABK,                               DE_ASTR,        KC_P7,     KC_P8,     KC_P9,  DE_CIRC, DE_PERC,
     DE_DQUO, DE_BSLS, DE_SLSH, DE_LPRN, DE_RPRN, DE_RABK,                               TD(TD_MIN_LOW), KC_P4,     KC_P5,     KC_P6,  DE_EQL,  DE_AMPR,
-    DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, TD(TD_EXC_QUE), XXXXXXX,      XXXXXXX, DE_PLUS,        KC_P1,     KC_P2,     KC_P3,  KC_P0,   XXXXXXX,
+    DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, TD(TD_EXC_QUE), XXXXXXX,      XXXXXXX, DE_PLUS,        KC_P1,     KC_P2,     KC_P3,  KC_P0,   KC_NUM,
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX,      XXXXXXX, XXXXXXX,        XXXXXXX,   XXXXXXX,   XXXXXXX
     ),
 
@@ -207,7 +207,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                                        ,------------------------------------------.
  * |  F1    |  F2  |  F3  |  F4  |  F5  |  F6  |                                        |  F7  |  F8  |  F9  |  F10 |  F11 |  F12  |
  * |--------+------+------+------+------+------|                                        |------+------+------+------+------+-------|
- * |        |      |      |      |      |      |                                        |  LB  | home |   up | pgup |      |       |
+ * |        |      |      |      |      |JIGGLE|                                        |  LB  | home |   up | pgup |      |       |
  * |--------+------+------+------+------+------|                                        |------+------+------+------+------+-------|
  * |        |      |      |      |      |      |                                        |  MB  |   <- |lock  |  ->  |INSERT| PRINT |
  * |--------+------+------+------+------+------+------.                          ,------+------+------+------+------+------+-------|
@@ -218,7 +218,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_navi] = LAYOUT(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,                          KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, JIGGLE,                         MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         MS_BTN2, KC_LEFT, KC_SCRL, KC_RGHT, KC_INS,  KC_PSCR,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, MS_BTN3, KC_END,  KC_DOWN, KC_PGDN, XXXXXXX, XXXXXXX,
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
@@ -233,7 +233,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+-------+-------+-------+-------+-------+------.                        ,------+------+------+------+------+------+-------|
  * |      |       |       |       |       |       |      |                        |ZOMBIE| leise|  F1  |  F2  |  F3  | F12  |LENNYF |
  * `----------------------+-------+-------+-------+------|                        |------+------+------+------+---------------------'
- *                        |       |       |      |       |                        |      |      |      |      |      |
+ *                        |       |       |      |       |                        |LOGIN |      |      |      |      |
  *                        `------------------------------'                        `----------------------------------'
  */
     [_fn] = LAYOUT(
@@ -241,7 +241,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                         KC_VOLU, KC_F7,   KC_F8,   KC_F9,  KC_F10, SHRUG,
     RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX,                         KC_MUTE, KC_F4,   KC_F5,   KC_F6,  KC_F11, FLIP,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       P_LOREM, KC_VOLD, KC_F1,   KC_F2,   KC_F3,  KC_F12, LENNYF,
-                      XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+                      XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     )
 };
 //@formatter:on
@@ -402,28 +402,50 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
         return OLED_ROTATION_270;
 }
+// Frames for the bouncing dot animation
+static const char bounce_frames[][8] = {
+    {0x00, 0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00}, // Bottom position
+    {0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00}, // Mid-low position
+    {0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, // Top position
+    {0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00}, // Mid-low position
+};
+// Function to render bouncing dot animation
+static void oled_render_bounce_anim(void) {
+    static uint32_t anim_timer = 0;
+    static uint8_t current_frame = 0;
+
+    if (timer_elapsed32(anim_timer) > ANIM_FRAME_TIME) {
+        anim_timer = timer_read32();
+        current_frame = (current_frame + 1) % (sizeof(bounce_frames) / 8);
+
+        oled_clear();
+        for (int i = 0; i < 8; i++) {
+            oled_write_raw_byte(bounce_frames[current_frame][i], i * OLED_DISPLAY_WIDTH + 64);
+        }
+    }
+}
 static void masterOled(void) {
     oled_clear();
     oled_set_cursor(0, 0);
-    oled_write_P(PSTR("Fishy"), false);
+    oled_write_P(PSTR("MAIN"), false);
     oled_set_cursor(0, 1);
-    oled_write("Layer: ",false);
+    oled_write("CENTER",false);
     oled_set_cursor(0,3);
  switch (get_highest_layer(layer_state)) {
         case _vou:
-            oled_write_P(PSTR("vou"), false);
+            oled_write_P(PSTR("VOU"), false);
             break;
         case _Nerd:
-            oled_write_P(PSTR("nerd"), false);
+            oled_write_P(PSTR("NERD"), false);
             break;
         case _Light:
-            oled_write_P(PSTR("Light"), false);
+            oled_write_P(PSTR("LIGHT"), false);
             break;
         case _FKEY:
-            oled_write_P(PSTR("Function"), false);
+            oled_write_P(PSTR("FUNCTION"), false);
             break;
         case _Game:
-            oled_write_P(PSTR("Game"), false);
+            oled_write_P(PSTR("GAME"), false);
             break;
         case _opy:
             oled_write_P(PSTR("OPY"), false);
@@ -488,7 +510,11 @@ bool oled_task_user(void) {
     if (is_keyboard_master()) {
         masterOled();
     } else {
+        if(token != INVALID_DEFERRED_TOKEN){
+            oled_render_bounce_anim();
+        }else{
         slaveOled();
+        }
     }
     return false;
 }

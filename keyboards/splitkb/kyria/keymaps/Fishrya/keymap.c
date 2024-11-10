@@ -180,7 +180,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_nr] = LAYOUT(
     DE_AT,   DE_PIPE, UC(EUR), DE_LCBR, DE_RCBR, DE_LABK,                                               DE_ASTR,        KC_P7,    KC_P8,    KC_P9, DE_CIRC, DE_PERC,
     DE_DQUO, DE_BSLS, DE_SLSH, DE_LPRN, DE_RPRN, DE_RABK,                                               TD(TD_MIN_LOW), KC_P4,    KC_P5,    KC_P6, DE_EQL, DE_AMPR,
-    DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, TD(TD_EXC_QUE), XXXXXXX, XXXXXXX,    XXXXXXX, JIGGLE,  DE_PLUS,        KC_P1,    KC_P2,    KC_P3, KC_P0, XXXXXXX,
+    DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, TD(TD_EXC_QUE), XXXXXXX, XXXXXXX,    XXXXXXX, JIGGLE,  DE_PLUS,        KC_P1,    KC_P2,    KC_P3, KC_P0, KC_NUM,
                                XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX
     ),
 /*nav and punctuation layer
