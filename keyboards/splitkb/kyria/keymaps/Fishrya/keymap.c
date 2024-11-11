@@ -206,7 +206,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-------+-------+-------+-------+-------+-------|                                           |------+------+------+------+------+--------|
   * |VALDWN |SATDWN |HUEDWN |SPEEDWN|RGBLST |XXXXXXX|                                           | mute |  F4  |  F5  |  F6  | F11  |   FLIP |
   * |-------+-------+-------+-------+-------+-------+-------------.               ,-------------+------+------+------+------+------+--------|
-  * |       |       |       |       |       |       |      |      |               |      |ZOMBIE| leise|  F1  |  F2  |  F3  | F12  | LENNYF |
+  * |       |       |       |       |       |       |      |      |               | LOGIN|ZOMBIE| leise|  F1  |  F2  |  F3  | F12  | LENNYF |
   * `-----------------------+-------+-------+-------+------+------|               |------+------+------+------+------+----------------------'
   *                         |       |       |       |      |      |               |      |      |      |      |      |
   *                         `-------------------------------------'               `----------------------------------'
@@ -214,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_fn] = LAYOUT(
     RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                                           KC_VOLU, KC_F7,   KC_F8,  KC_F9, KC_F10, SHRUG,
     RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX,                                           KC_MUTE, KC_F4,   KC_F5,  KC_F6, KC_F11, FLIP,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, P_LOREM, KC_VOLD, KC_F1,   KC_F2,  KC_F3, KC_F12, LENNYF,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       LOGIN  , P_LOREM, KC_VOLD, KC_F1,   KC_F2,  KC_F3, KC_F12, LENNYF,
                                XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     )
 };
@@ -480,7 +480,7 @@ static void slaveOled(void) {
     oled_write_raw_P(opyNerd64,sizeof(opyNerd64));
         break;
     case _navi:
-    oled_write_raw_P(navi64,sizeof(opyNavi64));
+    oled_write_raw_P(opyNavi64,sizeof(opyNavi64));
         break;
     case _fn:
     oled_write_raw_P(opyFunc64,sizeof(opyFunc64));
