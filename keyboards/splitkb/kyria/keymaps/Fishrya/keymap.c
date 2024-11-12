@@ -183,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, TD(TD_EXC_QUE), XXXXXXX, XXXXXXX,    XXXXXXX, JIGGLE,  DE_PLUS,        KC_P1,    KC_P2,    KC_P3, KC_P0, KC_NUM,
                                XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX
     ),
-/*nav and punctuation layer
+/*navi
   * ,-------------------------------------------.                                                  ,-------------------------------------------.
   * |        |      |      |      |      |      |                                                  |  LB  | home |   up | pgup |      |        |
   * |--------+------+------+------+------+------|                                                  |------+------+------+------+------+--------|
@@ -194,6 +194,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *                        |      |      |      |      |      |                      |      |      |      |      |      |
   *                        `----------------------------------'                      `----------------------------------'
   */
+
      [_navi] = LAYOUT(
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           MS_BTN2, KC_LEFT, KC_SCRL, KC_RGHT, KC_INS,  KC_PSCR,
@@ -380,36 +381,16 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
 }
 
-// Frames for the bouncing dot animation
-static const char bounce_frames[][8] = {
-    {0x00, 0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00}, // Bottom position
-    {0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00}, // Mid-low position
-    {0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, // Top position
-    {0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00}, // Mid-low position
-};
-
-// Function to render bouncing dot animation
-static void oled_render_bounce_anim(void) {
-    static uint32_t anim_timer = 0;
-    static uint8_t current_frame = 0;
-
-    if (timer_elapsed32(anim_timer) > ANIM_FRAME_TIME) {
-        anim_timer = timer_read32();
-        current_frame = (current_frame + 1) % (sizeof(bounce_frames) / 8);
-
-        oled_clear();
-        for (int i = 0; i < 8; i++) {
-            oled_write_raw_byte(bounce_frames[current_frame][i], i * OLED_DISPLAY_WIDTH + 64);
-        }
-    }
-}
 static void masterOled(void) {
     oled_clear();
     oled_set_cursor(0, 0);
-    oled_write_P(PSTR("Fishrya"), false);
+    oled_write_P(PSTR("Fishrya      V:1.3.7"), false);
     oled_set_cursor(0, 1);
-    oled_write("Layer: ",false);
+    oled_write("Code and Design by: ",false);
+    oled_set_cursor(0, 2);
+    oled_write("Scy Marshall Ltd.",false);
     oled_set_cursor(0,3);
+    oled_write("Currently active: ",false);
     switch (get_highest_layer(layer_state)) {
         case _vou:
             oled_write_P(PSTR("vou"), false);
@@ -448,8 +429,7 @@ static void masterOled(void) {
     led_t led_state = host_keyboard_led_state();
     oled_write_ln_P(led_state.caps_lock   ? PSTR("CAPSLOCK ") : PSTR(""), false);
     oled_set_cursor(0,5);
-    oled_write("WPM: ", false);
-    oled_set_cursor(0,6);
+    oled_write("Words per Minute: ", false);
     oled_write(get_u8_str(get_current_wpm(), ' '), false);
 }
 
@@ -495,12 +475,7 @@ bool oled_task_user(void) {
     if (is_keyboard_master()) {
         masterOled();
     } else {
-        if (token != INVALID_DEFERRED_TOKEN) {
-        // Jiggler is active, show bouncing animation
-            oled_render_bounce_anim();
-        } else {
-            slaveOled();
-        }
+        slaveOled();
     }
     return false;
 }
