@@ -213,16 +213,16 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+------.                          ,------+------+------+------+------+------+-------|
  * |        |      |      |      |      |      |      |                          |      |  RB  | end  |  dwn | pgdn |      |       |
  * `----------------------+------+------+------+------|                          |------+------+------+------+---------------------'
- *                 |      |      |      |      |      |                          |      |      |      |      |      |
+ *                 |      |      |      | SHIFT|      |                          | Login|      |      |      |      |
  *                 `----------------------------------'                          `----------------------------------'
  */
     [_navi] = LAYOUT(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,                          KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, JIGGLE,                         MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, JIGGLE,                          MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         MS_BTN2, KC_LEFT, KC_SCRL, KC_RGHT, KC_INS,  KC_PSCR,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, MS_BTN3, KC_END,  KC_DOWN, KC_PGDN, XXXXXXX, XXXXXXX,
-                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-    ),
+                      XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+   ),
 /*function layer
  * ,----------------------------------------------.                                      ,------------------------------------------.
  * |  F1  |  F2   |  F3   |  F4   |  F5   |  F6   |                                      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12  |
@@ -233,7 +233,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+-------+-------+-------+-------+-------+------.                        ,------+------+------+------+------+------+-------|
  * |      |       |       |       |       |       |      |                        |ZOMBIE| leise|  F1  |  F2  |  F3  | F12  |LENNYF |
  * `----------------------+-------+-------+-------+------|                        |------+------+------+------+---------------------'
- *                        |       |       |      |       |                        |LOGIN |      |      |      |      |
+ *                        |       |       |  SHIFT|      |                        |LOGIN |      |      |      |      |
  *                        `------------------------------'                        `----------------------------------'
  */
     [_fn] = LAYOUT(
@@ -241,7 +241,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                         KC_VOLU, KC_F7,   KC_F8,   KC_F9,  KC_F10, SHRUG,
     RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX,                         KC_MUTE, KC_F4,   KC_F5,   KC_F6,  KC_F11, FLIP,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       P_LOREM, KC_VOLD, KC_F1,   KC_F2,   KC_F3,  KC_F12, LENNYF,
-                      XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+                      XXXXXXX, XXXXXXX, XXXXXXX,  KC_LSFT, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     )
 };
 //@formatter:on
