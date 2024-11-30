@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(_navi),       DE_Q,        DE_Z,        DE_O,        DE_P,    DE_Y,                                           DE_W,    DE_C,   DE_M,        DE_V,          DE_X,         MO(_navi),
     TD(TD_COM_SEM), LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_U,                                           DE_D,    DE_T,   CTL_T(DE_N), ALT_T(DE_S),   LT(_nr,DE_R), TD(TD_DOT_COL),
     XXXXXXX,        LT(_fn,DE_J), DE_ODIA,     DE_ADIA,     DE_K,    DE_UDIA, KC_COPY, KC_PASTE,   SHOT,    XXXXXXX, DE_B,    DE_G,   DE_L,        TD(TD_SZ_DOL), LT(_fn,DE_F), XXXXXXX,
-                                               QK_LOCK,     KC_LGUI, KC_ESC,  KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC,  KC_BSPC, KC_DEL, KC_TRNS
+                                               QK_LOCK,     KC_LGUI, KC_ESC,  KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC,  KC_BSPC, KC_DEL, TG(_vou)
     ),
 /*number and symbols layer
  * ,-----------------------------------------.                                                     ,-----------------------------------------.
@@ -386,7 +386,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 static void masterOled(void) {
     oled_clear();
     oled_set_cursor(0, 0);
-    oled_write_P(PSTR("Fishrya      V:1.3.7"), false);
+    oled_write_P(PSTR("Fishrya      V:1.3.8"), false);
     oled_set_cursor(0, 1);
     oled_write("Code and Design by: ",false);
     oled_set_cursor(0, 2);
