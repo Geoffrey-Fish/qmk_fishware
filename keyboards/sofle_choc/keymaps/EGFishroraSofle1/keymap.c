@@ -23,15 +23,12 @@ char wpm_str[10];
 deferred_token token = INVALID_DEFERRED_TOKEN;
 //Layer Names
 enum layers {
-    _vou = 0,
-    _Nerd,
-    _Light,
-    _FKEY,
-    _Game,
+_trns = 0,
+    _qwer,
     _opy,
     _nr,
-    _navi,
-    _fn
+    _fn,
+    _navi
 };
 
 //custom defined special key codes
@@ -47,164 +44,91 @@ enum custom_keycodes {
 
 //Tap Dances
 enum TapDances{
-    TD_COM_SEM,
-    TD_DOT_COL,
-    TD_SZ_DOL,
-    TD_EXC_QUE,
-    TD_MIN_LOW
+    TD_C_S,
+    TD_D_C,
+    TD_S_D,
+    TD_M_L
 };
 
 const uint16_t PROGMEM
 keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // @formatter:off
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*,----------------------------------------------.                  TRNS Layer                   ,-----------------------------------------------.
+* |  ESC  |   1   |   2   |   3   |   4   |   5   |                                              |   6   |   7   |   8   |   9   |   0   |QWERTZ |
+* |-------+-------+-------+-------+-------+-------|                                              |-------+-------+-------+-------+-------+-------|
+* |   Q   |   J   |   Ä   |   O   |   U   |   K   |                                              |   Z   |   C   |   L   |   V   |   X   |   ß   |
+* |-------+-------+-------+-------+-------+-------|                                              |-------+-------+-------+-------+-------+-------|
+* |   ?   |(NR) G |(ALT)A |(CTRL)E|   I   |   H   |                                              |   D   |   T   |(CTRL)R|(ALT)N |(NR) S |   !   |
+* |-------+-------+-------+-------+-------+-------+-------.                              ,-------+-------+-------+-------+-------+-------+-------|
+* |(fn)TAB|  .:   |   Y   |   ,;  |   Ö   |   Ü   | Game  |                              |  SHOT |   B   |   P   |   M   |   W   |(FN) F | SHIFT |
+* `-----------------------+-------+-------+-------+-------|                              |-------+-------+-------+-------+-------+---------------'
+*                 |  (nav)|   LOCK|  META | Shift | SPACE |                              | ENTER | Space | BSPC  |   DEL | JIGGLE|
+*                 `--------------------------------------'                              `---------------------------------------' */
+    [_trns] = LAYOUT(
+    KC_ESC,         DE_1,         DE_2,        DE_3,        DE_4,    DE_5,                            DE_6,   DE_7,    DE_8,        DE_9,        DE_0,         TG(_Game),
+    DE_Q,           DE_J,         DE_ADIA,     DE_O,        DE_U,    DE_K,                            DE_Z,   DE_C,    DE_L,        DE_V,        DE_X,         KC_MINS,
+    DE_QUES,        LT(_nr,DE_G), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_H,                            DE_D,   DE_T,    CTL_T(DE_R), ALT_T(DE_N), LT(_nr,DE_S), DE_EXLM,
+    LT(_fn,KC_TAB), TD(TD_D_C),   DE_Y,        TD(TD_C_S),  DE_ODIA, DE_UDIA, TG(_qwer), /**/ SHOT,   DE_B,   DE_P,    DE_M,        DE_W,        LT(_fn,DE_F), KC_RSFT,
+                                  MO(_nav) ,   QK_LOCK,     KC_LGUI, KC_LSFT, KC_SPC, /**/    KC_ENT, KC_SPC, KC_BSPC, KC_DEL,      JIGGLE,
 
-/* vou
-* ,----------------------------------------------.                                                ,-----------------------------------------------.
-* |  ESC |   1   |   2   |   3   |   4   |   5   |                                                |   6   |   7   |   8   |   9   |   0   |QWERTZ |
-* |------+-------+-------+-------+-------+-------|                                                |-------+-------+-------+-------+-------+-------|
-* |TB/FKY|   v   |   .   |   o   |   u   |   ä   |                                                |   q   |   g   |   l   |   h   |   f   |  j    |
-* |------+-------+-------+-------+------+--------|                                                |-------+-------+-------+-------+-------+-------|
-* |  LV3 |   c   |   a   |   e   |   i   |   y   |                                                |   b   |   t   |   r   |   n   |   s   |  LV3  |
-* |------+-------+-------+-------+-------+-------+-------.                                .-------+-------+-------+-------+-------+-------+-------|
-* |SHIFT |   z   |   x   |   ,   |   ö   |   ü   |FKEY   |                                |  OPY  |   p   |   d   |   w   |   m   |   k   |SHIFT  |
-* `--------------+-------+-------+-------+-------+-------|                                |-------+-------+-------+-------+-------+---------------'
-*                |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                                |Enter  |BSPC   |DEL    | LV4   | SHOT  |
-*                '---------------------------------------'                                '---------------------------------------'
-*/
-    [_vou] =LAYOUT(
-    KC_ESC,           DE_1, DE_2,    DE_3,    DE_4,    DE_5,                              DE_6,    DE_7,   DE_8,       DE_9, DE_0, TG(_Game),
-    LT(_FKEY,KC_TAB), DE_V, DE_DOT,  DE_O,    DE_U,    DE_ADIA,                           DE_Q,    DE_G,   DE_L,       DE_H, DE_F, DE_J,
-    TT(_Nerd),        DE_C, DE_A,    DE_E,    DE_I,    DE_Y,                              DE_B,    DE_T,   DE_R,       DE_N, DE_S, LT(_Nerd,KC_MINS),
-    KC_LSFT,          DE_Z, DE_X,    DE_COMM, DE_ODIA, DE_UDIA, TT(_FKEY),      TG(_opy), DE_P,    DE_D,   DE_W,       DE_M, DE_K, KC_RSFT,
-                            QK_LOCK, KC_LALT, KC_LGUI, KC_LCTL, KC_SPC,         KC_ENT,   KC_BSPC, KC_DEL, MO(_Light), SHOT
-    ),
-
-/* Nerd
- * ,-----------------------------------------------.                                    ,-----------------------------------------------.
- * |   ⟳   |   ¹   |   ²   |   ³   |   ›   |   ‹   |                                   |   ç   |   œ   |   æ   |grav   | acut  | circum|
- * |-------+-------+-------+-------+-------+-------|                                    |-------+-------+-------+-------+-------+-------|
- * |  TAB  |   ^   |   _   |   {   |   }   |   @   |                                    |   !   |   <   |   >   |    =  |   &   |    %  |
- * |-------+-------+-------+-------+-------+-------|                                    |-------+------+--------+-------+-------+-------|
- * |  LV3  |   \   |   /   |   (   |   )   |   *   |                                    |   ?   |   :   |   ;   |   -   |   :   |  LV3  |
- * |-------+-------+-------+-------+-------+-------|-------.                    .-------|-------+------+--------+-------+-------+-------|
- * | CAPS  |   #   |   ~   |   [   |   ]   |   $   |FKEY   |                    |JIGGLE |   +   |   "   |   '   |   |   |   €   |SHIFT  |
- * `---------------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+---------------'
- *                 |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                    |Enter  |BSPC   |DEL    | LV4   | SHOT  |
- *                 `---------------------------------------'                    '--------------------------------------'
- */
-    [_Nerd] =LAYOUT (
-    UC(UHR), UC(HI1), UC(HI2), UC(HI3), UC(QLA), UC(QRA),                       UC(CEDL), UC(OEFFL), UC(AEFFL), DE_GRV,  DE_ACUT, DE_CIRC,
-    KC_TAB,  DE_CIRC, DE_UNDS, DE_LCBR, DE_RCBR, DE_AT,                         DE_EXLM,  DE_LABK,   DE_RABK,   DE_EQL,  DE_AMPR, DE_PERC,
-    KC_TRNS, DE_BSLS, DE_SLSH, DE_LPRN, DE_RPRN, DE_ASTR,                       DE_QUES,  DE_COLN,   DE_SCLN,   DE_MINS, DE_COLN, KC_TRNS,
-    KC_CAPS, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, DE_DLR, KC_TRNS,      JIGGLE,  DE_PLUS,  DE_DQUO,   DE_QUOT,   DE_PIPE, UC(EUR), KC_TRNS,
-                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS
-    ),
-/* Light
- * ,-----------------------------------------------.                                     ,-----------------------------------------------.
- * | SHRUG |LENNYF |FLIP   | LOREM |POMO   |LOGIN  |                                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
- * |-------+-------+-------+-------+-------+-------|                                     |-------+-------+-------+-------+-------+-------|
- * |VALUP  |SATUP  |HUEUP  |SPEEDUP|RGBNXT |RGB IO |                                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
- * |-------+-------+-------+-------+-------+-------|                                     |-------+-------+-------+-------+-------+-------|
- * |VALDWN |SATDWN |HUEDWN |SPEEDWN|RGBLST |XXXXXXX|                                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
- * |-------+-------+-------+-------+-------+-------|-------.                     .-------|-------+-------+-------+-------+-------+-------|
- * |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|FKEY   |                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
- * `---------------+-------+-------+-------+-------+-------|                     |-------+-------+-------+-------+-------+---------------'
- *                 |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                     |Enter  |BSPC   |DEL    | LV4   | SHOT  |
- *                 '--------------------------------------'                      '---------------------------------------'
-     */
-    [_Light] =LAYOUT(
-    SHRUG,   LENNYF,  FLIP,    P_LOREM, XXXXXXX,  LOGIN,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX ,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                      KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-    ),
-
-/* FKEY
- * ,-----------------------------------------------.                                        ,-------------------------------------------------.
- * |  F1   |  F2   |  F3   |  F4   |  F5   |  F6   |                                        |  F7  |  F8   |  F9   |  F10   |  F11   |  F12   |
- * |-------+-------+-------+-------+-------+-------|                                        |------+-------+-------+--------+--------+--------|
- * |XXXXXXX|XXXXXXX| UP    |XXXXXXX|POMO   |LOGIN  |                                        |   *  |   7   |   8   |   9    |    -   |XXXXXXX |
- * |-------+-------+-------+-------+-------+-------|                                        |------+-------+-------+--------+--------+--------|
- * |XXXXXXX| LEFT  | DOWN  | RIGHT |XXXXXXX|XXXXXXX|                                        |   /  |   4   |   5   |   6    |    +   |    -   |
- * |-------+-------+-------+-------+-------+-------|-------.                        .-------|------+-------+-------+--------+--------+--------|
- * |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|FKEY   |                        |XXXXXXX|   0  |   1   |   2   |   3    |   =    |   .    |
- * `---------------+-------+-------+-------+-------+-------|                        |-------+-------+-------+--------+------+-----------------'
- *                 |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                        |Enter  |BSPC   |DEL    | LV4   | SHOT  |
- *                 `--------------------------------------'                         '---------------------------------------'
- */
-    [_FKEY] =LAYOUT(
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX,  XXXXXXX, LOGIN,                        KC_PAST, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, XXXXXXX,
-    XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,                      KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_TILD,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, KC_TRNS,    KC_TRNS, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, KC_KP_DOT,
-                      XXXXXXX, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-    ),
-/* Game
- * ,---------------------------------------------.                                     ,----------------------------------------------.
+ /*,---------------------------------------------.             qwertz layer            ,----------------------------------------------.
  * | ESC   |   1   |   2   |   3   |   4   |   5  |                                    |   6   |   7   |   8   |   9   |   0   |  vou |
  * |-------+-------+-------+-------+-------+------|                                    |-------+-------+-------+-------+-------+------|
  * | Tab   |   Q   |   W   |   E   |   R   |   T  |                                    |   Z   |   U   |   I   |   O   |   P   |  Ü   |
  * |-------+-------+-------+-------+-------+------|                                    |-------+-------+-------+-------+-------+------|
  * |CAPS   |   A   |   S   |   D   |   F   |   G  |                                    |   H   |   J   |   K   |   L   |   Ö   |  Ä   |
  * |-------+-------+-------+-------+-------+------|-------.                    .-------|-------+-------+-------+-------+-------+------|
- * |SHIFT  |   Y   |   X   |   C   |   V   |   B  |FKEY   |                    |XXXXXXX|   N   |   M   |   ,   |   .   |   -   |RShift|
- * `--------------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+--------------'
- *                |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                    |Enter  |BSPC   |DEL    | LV4   | SHOT  |
- *                '---------------------------------------'                    '---------------------------------------'
- */
+ * |SHIFT  |   Y   |   X   |   C   |   V   |   B  |  trns |                    | SHOT  |   N   |   M   |   ,   |   .   |   -   |RShift|
+ * `---------------+-------+-------+-------+------+-------|                    |-------+-------+-------+-------+-------+--------------'
+ *                 |  nr   |  GUI  |  ALT  |LCTRL |Space  |                    |Enter  |Space  | BSPC  |  DEL  |  fn   |
+ *                 '--------------------------------------'                    '---------------------------------------'*/
     [_Game] =LAYOUT(
-    KC_ESC,  DE_1, DE_2,    DE_3,    DE_4,    DE_5, 				         DE_6,    DE_7,    DE_8,    DE_9,   DE_0,    KC_TRNS,
-    KC_TAB,  DE_Q, DE_W,    DE_E,    DE_R,    DE_T, 				         DE_Y,    DE_U,    DE_I,    DE_O,   DE_P,    DE_UDIA,
-    KC_CAPS, DE_A, DE_S,    DE_D,    DE_F,    DE_G, 				         DE_H,    DE_J,    DE_K,    DE_L,   DE_ODIA, DE_ADIA,
-    KC_LSFT, DE_Z, DE_X,    DE_C,    DE_V,    DE_B,    KC_TRNS,     KC_TRNS, DE_N,    DE_M,    DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
-                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  	KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-    ),
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/* OPY
- * ,----------------------------------------------.                                             ,-----------------------------------------------.
- * |  ESC  |   1   |   2   |   3   |   4   |   5   |                                            |   6   |   7   |   8   |   9   |   0   |QWERTZ |
- * |-------+-------+-------+-------+-------+-------|                                            |-------+-------+-------+-------+-------+-------|
- * | (NAV) |   Q   |   Z   |   O   |   P   |   Y   |                                            |   W   |   C   |   M   |   V   |   X   | (nav) |
- * |-------+-------+-------+-------+-------+-------|                                            |-------+-------+-------+-------+-------+-------|
- * |  , ;  |(NR) H |(ALT)A |(CTRL)E|   I   |   U   |                                            |   D   |   T   |(CTRL)N|(ALT)S |(NR) R |  . :  |
- * |-------+-------+-------+-------+-------+-------+-------.                            ,-------+-------+-------+-------+-------+-------+-------|
- * |  COPY |(FN)J  |   Ö   |   Ä   |   K   |   Ü   | PASTE |                            | VOU   |   B   |   G   |   L   |  ß $  |(FN) F | PASTE |
- * `---------------+-------+-------+-------+-------+-------|                            |-------+-------+-------+-------+-------+---------------'
- *                 |  LOCK |  META |  ESC  |C/SHIFT|   TAB |                            | ENTER | SPACE |  BSPC |   DEL | SHOT  |
- *                 `---------------------------------------'                            `---------------------------------------'
- */
-    [_opy] = LAYOUT(
-    KC_ESC,          DE_1,        DE_2,        DE_3,        DE_4,   DE_5,                         DE_6,   DE_7,    DE_8,        DE_9,          DE_0,         TG(_Game),
-    MO(_navi),       DE_Q,        DE_Z,        DE_O,        DE_P,   DE_Y,                         DE_W,   DE_C,    DE_M,        DE_V,          DE_X,         MO(_navi),
-    TD(TD_COM_SEM), LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,   DE_U,                         DE_D,   DE_T,    CTL_T(DE_N), ALT_T(DE_S),   LT(_nr,DE_R), TD(TD_DOT_COL),
-    KC_COPY,        LT(_fn,DE_J), DE_ODIA,     DE_ADIA,     DE_K,   DE_UDIA, XXXXXXX,    KC_TRNS ,DE_B,   DE_G,    DE_L,        TD(TD_SZ_DOL), LT(_fn,DE_F), KC_PASTE,
-                                  QK_LOCK,     KC_LGUI,     KC_ESC, KC_LSFT, KC_TAB,     KC_ENT,  KC_SPC, KC_BSPC, KC_DEL,      SHOT
-    ),
-/*number and symbols layer
- * ,-----------------------------------------.                                                ,-----------------------------------------.
- * |  ⟳   |   ¹  |   ²  | ³   |   ›  |   ‹  |                                                |   ç  |   œ  |   æ  | grav | acut | circ |
- * |------+------+------+------+------+------|                                                |------+------+------+------+------+------|
- * |   @  |   |  |   €  |  {   |   }  |   <  |                                                |   *  |   7  |  8   |   9  |   ^  |   %  |
- * |------+------+------+------+------+------|                                                |------+------+------+------+------+------|
- * |   "  |   \  |   /  |  (   |   )  |   >  |                                                |  - _ |   4  |  5   |   6  |   =  |   &  |
- * |------+------+------+------+------+------+------.                                  ,------+------+------+------+------+------+------|
- * |   '  |  #   |   ~  |   [  |   ]  |  ! ? |      |                                  |      |   +  |   1  |  2   |   3  |   0  |  NUM |
- * `--------------------+------+------+------+------|                                  |------+------+------+------+------+-------------'
- *               |      |      |      |      |      |                                  |      |      |      |      |      |
- *               `----------------------------------'                                  `----------------------------------'
- */
-    [_nr] = LAYOUT(
-    UC(UHR), UC(HI1), UC(HI2), UC(HI3), UC(QLA), UC(QRA),                               UC(CEDL),       UC(OEFFL), UC(AEFFL), DE_GRV, DE_ACUT, DE_CIRC,
-    DE_AT,   DE_PIPE, UC(EUR), DE_LCBR, DE_RCBR, DE_LABK,                               DE_ASTR,        KC_P7,     KC_P8,     KC_P9,  DE_CIRC, DE_PERC,
-    DE_DQUO, DE_BSLS, DE_SLSH, DE_LPRN, DE_RPRN, DE_RABK,                               TD(TD_MIN_LOW), KC_P4,     KC_P5,     KC_P6,  DE_EQL,  DE_AMPR,
-    DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, TD(TD_EXC_QUE), XXXXXXX,      XXXXXXX, DE_PLUS,        KC_P1,     KC_P2,     KC_P3,  KC_P0,   KC_NUM,
-                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX,      XXXXXXX, XXXXXXX,        XXXXXXX,   XXXXXXX,   XXXXXXX
+    KC_ESC,  DE_1, DE_2,    DE_3,    DE_4,    DE_5, 				        DE_6,   DE_7,    DE_8,    DE_9,   DE_0,    KC_TRNS,
+    KC_TAB,  DE_Q, DE_W,    DE_E,    DE_R,    DE_T, 				        DE_Y,   DE_U,    DE_I,    DE_O,   DE_P,    DE_UDIA,
+    KC_CAPS, DE_A, DE_S,    DE_D,    DE_F,    DE_G, 				        DE_H,   DE_J,    DE_K,    DE_L,   DE_ODIA, DE_ADIA,
+    KC_LSFT, DE_Z, DE_X,    DE_C,    DE_V,    DE_B,    KC_TRNS,     SHOT,   DE_N,   DE_M,    DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
+                   MO(_nr), KC_LGUI, KC_LALT, KC_LCTL, KC_SPC, /**/ KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  MO(_fn),
     ),
 
-/*nav and punctuation layer
- * ,-------------------------------------------.                                        ,------------------------------------------.
+ /*,-----------------------------------------.                   Num&Tech Layer               ,-----------------------------------------.
+ * |  ⟳   |   ¹  |   ²  | ³   |   ›  |   ‹  |                                                |   ç  |   œ  |   æ  | grav | acut | circ |
+ * |------+------+------+------+------+------|                                                |------+------+------+------+------+------|
+ * |   @  |   |  |   €  |  {   |   }  |   <  |                                                |   *  |   7  |  8   |   9  |   %  |  ^   |
+ * |------+------+------+------+------+------|                                                |------+------+------+------+------+------|
+ * |   "  |   \  |   /  |  (   |   )  |   >  |                                                |   -  |   4  |  5   |   6  |   =  |   &  |
+ * |------+------+------+------+------+------+------.                                  ,------+------+------+------+------+------+------|
+ * |   '  |  #   |   ~  |   [  |   ]  |  $   |      |                                  | SHOT |   _  |   1  |  2   |   3  |   0  |   +  |
+ * `--------------------+------+------+------+------|                                  |------+------+------+------+------+-------------'
+ *               |      |      |      |      |      |                                  |      |      |      |      |      |
+ *               `----------------------------------'                                  `----------------------------------'*/
+    [_nr] = LAYOUT(
+    UC(UHR), UC(HI1), UC(HI2), UC(HI3), UC(QLA), UC(QRA),                           UC(CEDL), UC(OEFFL), UC(AEFFL), DE_GRV, DE_ACUT, DE_CIRC,
+    DE_AT,   DE_PIPE, UC(EUR), DE_LCBR, DE_RCBR, DE_LABK,                           DE_ASTR,  KC_P7,     KC_P8,     KC_P9,  DE_PERC, DE_CIRC,
+    DE_DQUO, DE_BSLS, DE_SLSH, DE_LPRN, DE_RPRN, DE_RABK,                           DE_MINS,  KC_P4,     KC_P5,     KC_P6,  DE_EQL,  DE_AMPR,
+    DE_QUOT, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, KC_DLR, XXXXXXX,          SHOT,    DE_UNDS,  KC_P1,     KC_P2,     KC_P3,  KC_P0,   DE_PLUS,
+                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,          KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS),
+
+ /*,----------------------------------------------.           FN LAYER                   ,------------------------------------------.
+ * |  F1  |  F2   |  F3   |  F4   |  F5   |  F6   |                                      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12  |
+ * |------+-------+-------+-------+-------+-------|                                      |------+------+------+------+------+-------|
+ * |VALUP |SATUP  |HUEUP  |SPEEDUP|RGBNXT |RGB IO |                                      | laut |  F7  |  F8  |  F9  | F10  | SHRUG |
+ * |------+-------+-------+-------+-------+-------|                                      |------+------+------+------+------+-------|
+ * |VALDWN|SATDWN |HUEDWN |SPEEDWN|RGBLST |XXXXXXX|                                      | mute |  F4  |  F5  |  F6  | F11  |  FLIP |
+ * |------+-------+-------+-------+-------+-------+------.                        ,------+------+------+------+------+------+-------|
+ * |      |       |       |       |       |       |      |                        |ZOMBIE| leise|  F1  |  F2  |  F3  | F12  |LENNYF |
+ * `----------------------+-------+-------+-------+------|                        |------+------+------+------+---------------------'
+ *                |       |       |       |  SHIFT|      |                        |LOGIN |      |      |      |      |
+ *                `--------------------------------------'                        `----------------------------------'*/
+    [_fn] = LAYOUT(
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,    KC_F6,                           KC_F7,   KC_F8,   KC_F9,   KC_F10, KC_F11, KC_F12,
+    RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                         KC_VOLU, KC_F7,   KC_F8,   KC_F9,  KC_F10, SHRUG,
+    RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX,                         KC_MUTE, KC_F4,   KC_F5,   KC_F6,  KC_F11, FLIP,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       P_LOREM, KC_VOLD, KC_F1,   KC_F2,   KC_F3,  KC_F12, LENNYF,
+                      KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,       LOGIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+
+ /*,-------------------------------------------.             NAV LAYER                  ,------------------------------------------.
  * |  F1    |  F2  |  F3  |  F4  |  F5  |  F6  |                                        |  F7  |  F8  |  F9  |  F10 |  F11 |  F12  |
  * |--------+------+------+------+------+------|                                        |------+------+------+------+------+-------|
  * |        |      |      |      |      |JIGGLE|                                        |  LB  | home |   up | pgup |      |       |
@@ -214,44 +138,21 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |      |      |      |      |      |      |                          |      |  RB  | end  |  dwn | pgdn |      |       |
  * `----------------------+------+------+------+------|                          |------+------+------+------+---------------------'
  *                 |      |      |      | SHIFT|      |                          | Login|      |      |      |      |
- *                 `----------------------------------'                          `----------------------------------'
- */
+ *                 `----------------------------------'                          `----------------------------------'*/
     [_navi] = LAYOUT(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,                          KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, JIGGLE,                          MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         MS_BTN2, KC_LEFT, KC_SCRL, KC_RGHT, KC_INS,  KC_PSCR,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, MS_BTN3, KC_END,  KC_DOWN, KC_PGDN, XXXXXXX, XXXXXXX,
-                      XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-   ),
-/*function layer
- * ,----------------------------------------------.                                      ,------------------------------------------.
- * |  F1  |  F2   |  F3   |  F4   |  F5   |  F6   |                                      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12  |
- * |------+-------+-------+-------+-------+-------|                                      |------+------+------+------+------+-------|
- * |VALUP |SATUP  |HUEUP  |SPEEDUP|RGBNXT |RGB IO |                                      | laut |  F7  |  F8  |  F9  | F10  | SHRUG |
- * |------+-------+-------+-------+-------+-------|                                      |------+------+------+------+------+-------|
- * |VALDWN|SATDWN |HUEDWN |SPEEDWN|RGBLST |XXXXXXX|                                      | mute |  F4  |  F5  |  F6  | F11  |  FLIP |
- * |------+-------+-------+-------+-------+-------+------.                        ,------+------+------+------+------+------+-------|
- * |      |       |       |       |       |       |      |                        |ZOMBIE| leise|  F1  |  F2  |  F3  | F12  |LENNYF |
- * `----------------------+-------+-------+-------+------|                        |------+------+------+------+---------------------'
- *                        |       |       |  SHIFT|      |                        |LOGIN |      |      |      |      |
- *                        `------------------------------'                        `----------------------------------'
- */
-    [_fn] = LAYOUT(
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,    KC_F6,                           KC_F7,   KC_F8,   KC_F9,   KC_F10, KC_F11, KC_F12,
-    RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                         KC_VOLU, KC_F7,   KC_F8,   KC_F9,  KC_F10, SHRUG,
-    RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX,                         KC_MUTE, KC_F4,   KC_F5,   KC_F6,  KC_F11, FLIP,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       P_LOREM, KC_VOLD, KC_F1,   KC_F2,   KC_F3,  KC_F12, LENNYF,
-                      XXXXXXX, XXXXXXX, XXXXXXX,  KC_LSFT, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-    )
+                      XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT, XXXXXXX,       LOGIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),
 };
 //@formatter:on
 //Tap Dances
 tap_dance_action_t tap_dance_actions[]={
-    [TD_COM_SEM] = ACTION_TAP_DANCE_DOUBLE(DE_COMM,DE_SCLN),
-    [TD_DOT_COL] = ACTION_TAP_DANCE_DOUBLE(DE_DOT,DE_COLN),
-    [TD_SZ_DOL] = ACTION_TAP_DANCE_DOUBLE(KC_MINS,KC_DLR),
-    [TD_EXC_QUE] = ACTION_TAP_DANCE_DOUBLE(DE_EXLM,DE_QUES),
-    [TD_MIN_LOW] = ACTION_TAP_DANCE_DOUBLE(DE_MINS,DE_UNDS)
+    [TD_C_S] = ACTION_TAP_DANCE_DOUBLE(DE_COMM,DE_SCLN),
+    [TD_D_C] = ACTION_TAP_DANCE_DOUBLE(DE_DOT,DE_COLN),
+    [TD_S_D] = ACTION_TAP_DANCE_DOUBLE(KC_MINS,KC_DLR),
+    [TD_M_L] = ACTION_TAP_DANCE_DOUBLE(DE_MINS,DE_UNDS)
 };
 //Shorts Switchcases
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -343,9 +244,8 @@ void matrix_scan_user(void) {
 }
 bool encoder_update_user(uint8_t index, bool clockwise) {
     switch (get_highest_layer(layer_state)) {
-        case _vou:
-        case _Game:
-        case _opy:
+        case _trns:
+        case _qwer:
             if (index == 1) {
                 if (clockwise) {
                     tap_code(KC_RIGHT);
@@ -360,8 +260,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
             }
             break;
-        case _Nerd:
-        case _Light:
         case _nr:
             if (index == 1) {
                 if (clockwise) {
@@ -377,8 +275,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
             }
             break;
-        case _FKEY:
-        case _navi:
+        case _nav:
         case _fn:
             // Switch between windows on Windows with alt tab.
             if (index == 0) {
@@ -402,69 +299,36 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
         return OLED_ROTATION_270;
 }
-// Frames for the bouncing dot animation
-static const char bounce_frames[][8] = {
-    {0x00, 0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00}, // Bottom position
-    {0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00}, // Mid-low position
-    {0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, // Top position
-    {0x00, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00}, // Mid-low position
-};
-// Function to render bouncing dot animation
-static void oled_render_bounce_anim(void) {
-    static uint32_t anim_timer = 0;
-    static uint8_t current_frame = 0;
 
-    if (timer_elapsed32(anim_timer) > ANIM_FRAME_TIME) {
-        anim_timer = timer_read32();
-        current_frame = (current_frame + 1) % (sizeof(bounce_frames) / 8);
-
-        oled_clear();
-        for (int i = 0; i < 8; i++) {
-            oled_write_raw_byte(bounce_frames[current_frame][i], i * OLED_DISPLAY_WIDTH + 64);
-        }
-    }
-}
 static void masterOled(void) {
     oled_clear();
     oled_set_cursor(0, 0);
-    oled_write_P(PSTR("MAIN"), false);
+    oled_write_P(PSTR("F1$h"), false);
     oled_set_cursor(0, 1);
-    oled_write("CENTER",false);
+    oled_write("p0nD",false);
     oled_set_cursor(0,3);
  switch (get_highest_layer(layer_state)) {
-        case _vou:
-            oled_write_P(PSTR("VOU"), false);
+        case _trns:
+            oled_write_P(PSTR("trns"), false);
             break;
-        case _Nerd:
-            oled_write_P(PSTR("NERD"), false);
-            break;
-        case _Light:
-            oled_write_P(PSTR("LIGHT"), false);
-            break;
-        case _FKEY:
-            oled_write_P(PSTR("FUNCTION"), false);
-            break;
-        case _Game:
+        case _qwer:
             oled_write_P(PSTR("GAME"), false);
-            break;
-        case _opy:
-            oled_write_P(PSTR("OPY"), false);
             break;
         case _nr:
             oled_write_P(PSTR("n3rD"), false);
             break;
-        case _navi:
-            oled_write_P(PSTR("navy"), false);
-            break;
         case _fn:
             oled_write_P(PSTR("fn"), false);
+            break;
+        case _navi:
+            oled_write_P(PSTR("nav"), false);
             break;
         default:
         break;
     }
     oled_set_cursor(0, 5);
     led_t led_state = host_keyboard_led_state();
-    oled_write_ln_P(led_state.caps_lock   ? PSTR("CAPSLOCK ") : PSTR(" "), false);
+    oled_write_ln_P(led_state.caps_lock   ? PSTR("CAPS ") : PSTR(" "), false);
     oled_set_cursor(0,6);
     oled_write("WPM: ", false);
     oled_set_cursor(0,7);
@@ -473,32 +337,20 @@ static void masterOled(void) {
 
 static void slaveOled(void) {
     switch (get_highest_layer(layer_state)) {
-    case _vou:
-        oled_write_raw_P(vou32,sizeof(vou32));
+    case _trns:
+        oled_write_raw_P(Gay32,sizeof(Gay32));
         break;
-    case _Nerd:
-        oled_write_raw_P(nerd32,sizeof(nerd32));
-        break;
-    case _Light:
-        oled_write_raw_P(light32,sizeof(light32));
-        break;
-    case _Game:
-        oled_write_raw_P(game32,sizeof(game32));
-        break;
-    case _FKEY:
-        oled_write_raw_P(func32,sizeof(func32));
-        break;
-    case _opy:
-    oled_write_raw_P(opy32,sizeof(opy32));
+    case _qwer:
+        oled_write_raw_P(Game32,sizeof(Game32));
         break;
     case _nr:
-    oled_write_raw_P(opyNerd32,sizeof(opyNerd32));
-        break;
-    case _navi:
-    oled_write_raw_P(opyNavi32,sizeof(opyNavi32));
+    oled_write_raw_P(Nerd32,sizeof(Nerd32));
         break;
     case _fn:
-    oled_write_raw_P(opyFunc32,sizeof(opyFunc32));
+    oled_write_raw_P(Func32,sizeof(Func32));
+        break;
+    case _navi:
+    oled_write_raw_P(Navi32,sizeof(Navi32));
         break;
     default:
         break;
@@ -510,14 +362,89 @@ bool oled_task_user(void) {
     if (is_keyboard_master()) {
         masterOled();
     } else {
-        if(token != INVALID_DEFERRED_TOKEN){
-            oled_render_bounce_anim();
-        }else{
         slaveOled();
-        }
     }
     return false;
 }
 
 
+/* vou
+* ,----------------------------------------------.                                                ,-----------------------------------------------.
+* |  ESC |   1   |   2   |   3   |   4   |   5   |                                                |   6   |   7   |   8   |   9   |   0   |QWERTZ |
+* |------+-------+-------+-------+-------+-------|                                                |-------+-------+-------+-------+-------+-------|
+* |TB/FKY|   v   |   .   |   o   |   u   |   ä   |                                                |   q   |   g   |   l   |   h   |   f   |  j    |
+* |------+-------+-------+-------+------+--------|                                                |-------+-------+-------+-------+-------+-------|
+* |  LV3 |   c   |   a   |   e   |   i   |   y   |                                                |   b   |   t   |   r   |   n   |   s   |  LV3  |
+* |------+-------+-------+-------+-------+-------+-------.                                .-------+-------+-------+-------+-------+-------+-------|
+* |SHIFT |   z   |   x   |   ,   |   ö   |   ü   |FKEY   |                                |  OPY  |   p   |   d   |   w   |   m   |   k   |SHIFT  |
+* `--------------+-------+-------+-------+-------+-------|                                |-------+-------+-------+-------+-------+---------------'
+*                |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                                |Enter  |BSPC   |DEL    | LV4   | SHOT  |
+*                '---------------------------------------'                                '---------------------------------------'
+*/
+   /* [_vou] =LAYOUT(
+    KC_ESC,           DE_1, DE_2,    DE_3,    DE_4,    DE_5,                              DE_6,    DE_7,   DE_8,       DE_9, DE_0, TG(_Game),
+    LT(_FKEY,KC_TAB), DE_V, DE_DOT,  DE_O,    DE_U,    DE_ADIA,                           DE_Q,    DE_G,   DE_L,       DE_H, DE_F, DE_J,
+    TT(_Nerd),        DE_C, DE_A,    DE_E,    DE_I,    DE_Y,                              DE_B,    DE_T,   DE_R,       DE_N, DE_S, LT(_Nerd,KC_MINS),
+    KC_LSFT,          DE_Z, DE_X,    DE_COMM, DE_ODIA, DE_UDIA, TT(_FKEY),      TG(_opy), DE_P,    DE_D,   DE_W,       DE_M, DE_K, KC_RSFT,
+                            QK_LOCK, KC_LALT, KC_LGUI, KC_LCTL, KC_SPC,         KC_ENT,   KC_BSPC, KC_DEL, MO(_Light), SHOT
+    ),*/
+/* Nerd
+ * ,-----------------------------------------------.                                    ,-----------------------------------------------.
+ * |   ⟳   |   ¹   |   ²   |   ³   |   ›   |   ‹   |                                   |   ç   |   œ   |   æ   |grav   | acut  | circum|
+ * |-------+-------+-------+-------+-------+-------|                                    |-------+-------+-------+-------+-------+-------|
+ * |  TAB  |   ^   |   _   |   {   |   }   |   @   |                                    |   !   |   <   |   >   |    =  |   &   |    %  |
+ * |-------+-------+-------+-------+-------+-------|                                    |-------+------+--------+-------+-------+-------|
+ * |  LV3  |   \   |   /   |   (   |   )   |   *   |                                    |   ?   |   :   |   ;   |   -   |   :   |  LV3  |
+ * |-------+-------+-------+-------+-------+-------|-------.                    .-------|-------+------+--------+-------+-------+-------|
+ * | CAPS  |   #   |   ~   |   [   |   ]   |   $   |FKEY   |                    |JIGGLE |   +   |   "   |   '   |   |   |   €   |SHIFT  |
+ * `---------------+-------+-------+-------+-------+-------|                    |-------+-------+-------+-------+-------+---------------'
+ *                 |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                    |Enter  |BSPC   |DEL    | LV4   | SHOT  |
+ *                 `---------------------------------------'                    '--------------------------------------'
+  [_Nerd] =LAYOUT (
+    UC(UHR), UC(HI1), UC(HI2), UC(HI3), UC(QLA), UC(QRA),                       UC(CEDL), UC(OEFFL), UC(AEFFL), DE_GRV,  DE_ACUT, DE_CIRC,
+    KC_TAB,  DE_CIRC, DE_UNDS, DE_LCBR, DE_RCBR, DE_AT,                         DE_EXLM,  DE_LABK,   DE_RABK,   DE_EQL,  DE_AMPR, DE_PERC,
+    KC_TRNS, DE_BSLS, DE_SLSH, DE_LPRN, DE_RPRN, DE_ASTR,                       DE_QUES,  DE_COLN,   DE_SCLN,   DE_MINS, DE_COLN, KC_TRNS,
+    KC_CAPS, DE_HASH, DE_TILD, DE_LBRC, DE_RBRC, DE_DLR, KC_TRNS,      JIGGLE,  DE_PLUS,  DE_DQUO,   DE_QUOT,   DE_PIPE, UC(EUR), KC_TRNS,
+                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS
+    ),
+* Light
+ * ,-----------------------------------------------.                                     ,-----------------------------------------------.
+ * | SHRUG |LENNYF |FLIP   | LOREM |POMO   |LOGIN  |                                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
+ * |-------+-------+-------+-------+-------+-------|                                     |-------+-------+-------+-------+-------+-------|
+ * |VALUP  |SATUP  |HUEUP  |SPEEDUP|RGBNXT |RGB IO |                                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
+ * |-------+-------+-------+-------+-------+-------|                                     |-------+-------+-------+-------+-------+-------|
+ * |VALDWN |SATDWN |HUEDWN |SPEEDWN|RGBLST |XXXXXXX|                                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
+ * |-------+-------+-------+-------+-------+-------|-------.                     .-------|-------+-------+-------+-------+-------+-------|
+ * |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|FKEY   |                     |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|
+ * `---------------+-------+-------+-------+-------+-------|                     |-------+-------+-------+-------+-------+---------------'
+ *                 |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                     |Enter  |BSPC   |DEL    | LV4   | SHOT  |
+ *                 '--------------------------------------'                      '---------------------------------------'
+     *
+    [_Light] =LAYOUT(
+    SHRUG,   LENNYF,  FLIP,    P_LOREM, XXXXXXX,  LOGIN,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    RGB_VAI, RGB_SAI, RGB_HUI, RGB_SPI, RGB_MOD,  RGB_TOG,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX ,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                      KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    ),
 
+/* FKEY
+ * ,-----------------------------------------------.                                        ,-------------------------------------------------.
+ * |  F1   |  F2   |  F3   |  F4   |  F5   |  F6   |                                        |  F7  |  F8   |  F9   |  F10   |  F11   |  F12   |
+ * |-------+-------+-------+-------+-------+-------|                                        |------+-------+-------+--------+--------+--------|
+ * |XXXXXXX|XXXXXXX| UP    |XXXXXXX|POMO   |LOGIN  |                                        |   *  |   7   |   8   |   9    |    -   |XXXXXXX |
+ * |-------+-------+-------+-------+-------+-------|                                        |------+-------+-------+--------+--------+--------|
+ * |XXXXXXX| LEFT  | DOWN  | RIGHT |XXXXXXX|XXXXXXX|                                        |   /  |   4   |   5   |   6    |    +   |    -   |
+ * |-------+-------+-------+-------+-------+-------|-------.                        .-------|------+-------+-------+--------+--------+--------|
+ * |XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|XXXXXXX|FKEY   |                        |XXXXXXX|   0  |   1   |   2   |   3    |   =    |   .    |
+ * `---------------+-------+-------+-------+-------+-------|                        |-------+-------+-------+--------+------+-----------------'
+ *                 |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                        |Enter  |BSPC   |DEL    | LV4   | SHOT  |
+ *                 `--------------------------------------'                         '---------------------------------------'
+ *
+    [_FKEY] =LAYOUT(
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX,  XXXXXXX, LOGIN,                        KC_PAST, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, XXXXXXX,
+    XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,                      KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_TILD,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, KC_TRNS,    KC_TRNS, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, KC_KP_DOT,
+                      XXXXXXX, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    ),*/
