@@ -23,12 +23,11 @@ char wpm_str[10];
 deferred_token token = INVALID_DEFERRED_TOKEN;
 //Layer Names
 enum layers {
-_trns = 0,
+    _trns = 0,
     _qwer,
-    _opy,
     _nr,
     _fn,
-    _navi
+    _nav
 };
 
 //custom defined special key codes
@@ -67,14 +66,14 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                 |  (nav)|   LOCK|  META | Shift | SPACE |                              | ENTER | Space | BSPC  |   DEL | JIGGLE|
 *                 `--------------------------------------'                              `---------------------------------------' */
     [_trns] = LAYOUT(
-    KC_ESC,         DE_1,         DE_2,        DE_3,        DE_4,    DE_5,                            DE_6,   DE_7,    DE_8,        DE_9,        DE_0,         TG(_Game),
+    KC_ESC,         DE_1,         DE_2,        DE_3,        DE_4,    DE_5,                            DE_6,   DE_7,    DE_8,        DE_9,        DE_0,         TG(_qwer),
     DE_Q,           DE_J,         DE_ADIA,     DE_O,        DE_U,    DE_K,                            DE_Z,   DE_C,    DE_L,        DE_V,        DE_X,         KC_MINS,
     DE_QUES,        LT(_nr,DE_G), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_H,                            DE_D,   DE_T,    CTL_T(DE_R), ALT_T(DE_N), LT(_nr,DE_S), DE_EXLM,
     LT(_fn,KC_TAB), TD(TD_D_C),   DE_Y,        TD(TD_C_S),  DE_ODIA, DE_UDIA, TG(_qwer), /**/ SHOT,   DE_B,   DE_P,    DE_M,        DE_W,        LT(_fn,DE_F), KC_RSFT,
-                                  MO(_nav) ,   QK_LOCK,     KC_LGUI, KC_LSFT, KC_SPC, /**/    KC_ENT, KC_SPC, KC_BSPC, KC_DEL,      JIGGLE,
+                                  MO(_nav) ,   QK_LOCK,     KC_LGUI, KC_LSFT, KC_SPC, /**/    KC_ENT, KC_SPC, KC_BSPC, KC_DEL,      JIGGLE),
 
  /*,---------------------------------------------.             qwertz layer            ,----------------------------------------------.
- * | ESC   |   1   |   2   |   3   |   4   |   5  |                                    |   6   |   7   |   8   |   9   |   0   |  vou |
+ * | ESC   |   1   |   2   |   3   |   4   |   5  |                                    |   6   |   7   |   8   |   9   |   0   | trns |
  * |-------+-------+-------+-------+-------+------|                                    |-------+-------+-------+-------+-------+------|
  * | Tab   |   Q   |   W   |   E   |   R   |   T  |                                    |   Z   |   U   |   I   |   O   |   P   |  Ü   |
  * |-------+-------+-------+-------+-------+------|                                    |-------+-------+-------+-------+-------+------|
@@ -84,13 +83,12 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `---------------+-------+-------+-------+------+-------|                    |-------+-------+-------+-------+-------+--------------'
  *                 |  nr   |  GUI  |  ALT  |LCTRL |Space  |                    |Enter  |Space  | BSPC  |  DEL  |  fn   |
  *                 '--------------------------------------'                    '---------------------------------------'*/
-    [_Game] =LAYOUT(
+    [_qwer] =LAYOUT(
     KC_ESC,  DE_1, DE_2,    DE_3,    DE_4,    DE_5, 				        DE_6,   DE_7,    DE_8,    DE_9,   DE_0,    KC_TRNS,
     KC_TAB,  DE_Q, DE_W,    DE_E,    DE_R,    DE_T, 				        DE_Y,   DE_U,    DE_I,    DE_O,   DE_P,    DE_UDIA,
     KC_CAPS, DE_A, DE_S,    DE_D,    DE_F,    DE_G, 				        DE_H,   DE_J,    DE_K,    DE_L,   DE_ODIA, DE_ADIA,
     KC_LSFT, DE_Z, DE_X,    DE_C,    DE_V,    DE_B,    KC_TRNS,     SHOT,   DE_N,   DE_M,    DE_COMM, DE_DOT, DE_MINS, KC_RSFT,
-                   MO(_nr), KC_LGUI, KC_LALT, KC_LCTL, KC_SPC, /**/ KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  MO(_fn),
-    ),
+                   MO(_nr), KC_LGUI, KC_LALT, KC_LCTL, KC_SPC, /**/ KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  MO(_fn)),
 
  /*,-----------------------------------------.                   Num&Tech Layer               ,-----------------------------------------.
  * |  ⟳   |   ¹  |   ²  | ³   |   ›  |   ‹  |                                                |   ç  |   œ  |   æ  | grav | acut | circ |
@@ -139,7 +137,7 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------+------+------+------+------|                          |------+------+------+------+---------------------'
  *                 |      |      |      | SHIFT|      |                          | Login|      |      |      |      |
  *                 `----------------------------------'                          `----------------------------------'*/
-    [_navi] = LAYOUT(
+    [_nav] = LAYOUT(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,                          KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, JIGGLE,                          MS_BTN1, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         MS_BTN2, KC_LEFT, KC_SCRL, KC_RGHT, KC_INS,  KC_PSCR,
@@ -320,7 +318,7 @@ static void masterOled(void) {
         case _fn:
             oled_write_P(PSTR("fn"), false);
             break;
-        case _navi:
+        case _nav:
             oled_write_P(PSTR("nav"), false);
             break;
         default:
@@ -349,8 +347,8 @@ static void slaveOled(void) {
     case _fn:
     oled_write_raw_P(Func32,sizeof(Func32));
         break;
-    case _navi:
-    oled_write_raw_P(Navi32,sizeof(Navi32));
+    case _nav:
+    oled_write_raw_P(Nav32,sizeof(Nav32));
         break;
     default:
         break;
@@ -380,15 +378,14 @@ bool oled_task_user(void) {
 * `--------------+-------+-------+-------+-------+-------|                                |-------+-------+-------+-------+-------+---------------'
 *                |QKLOCK | LAlt  | LGUI  |LCTRL  |Space  |                                |Enter  |BSPC   |DEL    | LV4   | SHOT  |
 *                '---------------------------------------'                                '---------------------------------------'
-*/
-   /* [_vou] =LAYOUT(
+ [_vou] =LAYOUT(
     KC_ESC,           DE_1, DE_2,    DE_3,    DE_4,    DE_5,                              DE_6,    DE_7,   DE_8,       DE_9, DE_0, TG(_Game),
     LT(_FKEY,KC_TAB), DE_V, DE_DOT,  DE_O,    DE_U,    DE_ADIA,                           DE_Q,    DE_G,   DE_L,       DE_H, DE_F, DE_J,
     TT(_Nerd),        DE_C, DE_A,    DE_E,    DE_I,    DE_Y,                              DE_B,    DE_T,   DE_R,       DE_N, DE_S, LT(_Nerd,KC_MINS),
     KC_LSFT,          DE_Z, DE_X,    DE_COMM, DE_ODIA, DE_UDIA, TT(_FKEY),      TG(_opy), DE_P,    DE_D,   DE_W,       DE_M, DE_K, KC_RSFT,
                             QK_LOCK, KC_LALT, KC_LGUI, KC_LCTL, KC_SPC,         KC_ENT,   KC_BSPC, KC_DEL, MO(_Light), SHOT
-    ),*/
-/* Nerd
+    ),
+* Nerd
  * ,-----------------------------------------------.                                    ,-----------------------------------------------.
  * |   ⟳   |   ¹   |   ²   |   ³   |   ›   |   ‹   |                                   |   ç   |   œ   |   æ   |grav   | acut  | circum|
  * |-------+-------+-------+-------+-------+-------|                                    |-------+-------+-------+-------+-------+-------|
@@ -428,7 +425,7 @@ bool oled_task_user(void) {
                       KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
-/* FKEY
+* FKEY
  * ,-----------------------------------------------.                                        ,-------------------------------------------------.
  * |  F1   |  F2   |  F3   |  F4   |  F5   |  F6   |                                        |  F7  |  F8   |  F9   |  F10   |  F11   |  F12   |
  * |-------+-------+-------+-------+-------+-------|                                        |------+-------+-------+--------+--------+--------|
@@ -447,4 +444,5 @@ bool oled_task_user(void) {
     XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,                      KC_PSLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_TILD,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, KC_TRNS,    KC_TRNS, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, KC_KP_DOT,
                       XXXXXXX, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-    ),*/
+    ),
+*/
