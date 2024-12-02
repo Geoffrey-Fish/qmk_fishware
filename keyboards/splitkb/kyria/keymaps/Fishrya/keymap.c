@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*,-----------------------------------------------.                       TRNS LAYOUT                            ,-----------------------------------------------.
 * |   Q   |   J   |   Ä   |   O   |   U   |   K   |                                                              |   Z   |   C   |   L   |   V   |   X   |   ß   |
 * |-------+-------+-------+-------+-------+-------|                                                              |-------+-------+-------+-------+-------+-------|
-* |   ?   |(NR) G |(ALT)A |(CTRL)E|   I   |   H   |                                                              |   D   |   T   |(CTRL)R|(ALT)N |(NR) S |   !   |
+* |   ?   |(NR) H |(ALT)A |(CTRL)E|   I   |   G   |                                                              |   D   |   T   |(CTRL)N|(ALT)R |(NR) S |   !   |
 * |-------+-------+-------+-------+-------+-------+-------+-------.                              ,-------+-------+-------+-------+-------+-------+-------+-------|
 * |(fn)TAB|  .:   |   Y   |   ,;  |   Ö   |   Ü   | (nav)#| ENTER |                              |  SHOT |   -_  |   B   |   P   |   M   |   W   |(FN) F | SHIFT |
 * `-----------------------+-------+-------+-------+-------+-------|                              |-------+-------+-------+-------+-------+-----------------------'
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                         `---------------------------------------'                              `---------------------------------------'     */
     [_trns] = LAYOUT(
     DE_Q,           DE_J,         DE_ADIA,     DE_O,        DE_U,    DE_K,                                                    DE_Z,    DE_C,   DE_L,        DE_V,        DE_X,         KC_MINS,
-    DE_QUES,        LT(_nr,DE_G), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_H,                                                       DE_D,    DE_T,   CTL_T(DE_R), ALT_T(DE_N), LT(_nr,DE_S), DE_EXLM,
+    DE_QUES,        LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_G,                            DE_D,   DE_T,    CTL_T(DE_N), ALT_T(DE_R), LT(_nr,DE_S), DE_EXLM,
     LT(_fn,KC_TAB), TD(TD_D_C),   DE_Y,        TD(TD_C_S),  DE_ODIA, DE_UDIA, LT(_nav,DE_HASH), KC_ENT, /**/ SHOT,   TD(TD_M_L), DE_B,    DE_P,   DE_M,        DE_W,        LT(_fn,DE_F), KC_RSFT,
                                                TG(_qwer) ,  KC_LGUI, KC_ESC,  KC_LSFT,          KC_SPC, /**/ KC_ENT, KC_SPC,     KC_BSPC, KC_DEL, TG(_qwer)),
  //-----------------------------------------------------------------------WRITING--LAYOUTS---------------------------------------------------------------------------------------------------

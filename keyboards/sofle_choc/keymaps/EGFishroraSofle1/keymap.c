@@ -59,18 +59,18 @@ keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |-------+-------+-------+-------+-------+-------|                                              |-------+-------+-------+-------+-------+-------|
 * |   Q   |   J   |   Ä   |   O   |   U   |   K   |                                              |   Z   |   C   |   L   |   V   |   X   |   ß   |
 * |-------+-------+-------+-------+-------+-------|                                              |-------+-------+-------+-------+-------+-------|
-* |   ?   |(NR) G |(ALT)A |(CTRL)E|   I   |   H   |                                              |   D   |   T   |(CTRL)R|(ALT)N |(NR) S |   !   |
+* |   ?   |(NR) H |(ALT)A |(CTRL)E|   I   |   G   |                                              |   D   |   T   |(CTRL)N|(ALT)R |(NR) S |   !   |
 * |-------+-------+-------+-------+-------+-------+-------.                              ,-------+-------+-------+-------+-------+-------+-------|
-* |(fn)TAB|  .:   |   Y   |   ,;  |   Ö   |   Ü   | Game  |                              |  SHOT |   B   |   P   |   M   |   W   |(FN) F | SHIFT |
+* |(fn)TAB|  .:   |   Y   |   ,;  |   Ö   |   Ü   | Game  |                              | Jiggle|   B   |   P   |   M   |   W   |(FN) F | SHIFT |
 * `-----------------------+-------+-------+-------+-------|                              |-------+-------+-------+-------+-------+---------------'
-*                 |  (nav)|   LOCK|  META | Shift | SPACE |                              | ENTER | Space | BSPC  |   DEL | JIGGLE|
+*                 |  (nav)|   LOCK|  META | Shift | SPACE |                              | ENTER | Space | BSPC  |   DEL | Shot  |
 *                 `--------------------------------------'                              `---------------------------------------' */
     [_trns] = LAYOUT(
     KC_ESC,         DE_1,         DE_2,        DE_3,        DE_4,    DE_5,                            DE_6,   DE_7,    DE_8,        DE_9,        DE_0,         TG(_qwer),
     DE_Q,           DE_J,         DE_ADIA,     DE_O,        DE_U,    DE_K,                            DE_Z,   DE_C,    DE_L,        DE_V,        DE_X,         KC_MINS,
-    DE_QUES,        LT(_nr,DE_G), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_H,                            DE_D,   DE_T,    CTL_T(DE_R), ALT_T(DE_N), LT(_nr,DE_S), DE_EXLM,
-    LT(_fn,KC_TAB), TD(TD_D_C),   DE_Y,        TD(TD_C_S),  DE_ODIA, DE_UDIA, TG(_qwer), /**/ SHOT,   DE_B,   DE_P,    DE_M,        DE_W,        LT(_fn,DE_F), KC_RSFT,
-                                  MO(_nav) ,   QK_LOCK,     KC_LGUI, KC_LSFT, KC_SPC, /**/    KC_ENT, KC_SPC, KC_BSPC, KC_DEL,      JIGGLE),
+    DE_QUES,        LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_G,                            DE_D,   DE_T,    CTL_T(DE_N), ALT_T(DE_R), LT(_nr,DE_S), DE_EXLM,
+    LT(_fn,KC_TAB), TD(TD_D_C),   DE_Y,        TD(TD_C_S),  DE_ODIA, DE_UDIA, TG(_qwer), /**/ JIGGLE,   DE_B,   DE_P,    DE_M,        DE_W,        LT(_fn,DE_F), KC_RSFT,
+                                  MO(_nav) ,   QK_LOCK,     KC_LGUI, KC_LSFT, KC_SPC, /**/    KC_ENT, KC_SPC, KC_BSPC, KC_DEL,      SHOT),
 
  /*,---------------------------------------------.             qwertz layer            ,----------------------------------------------.
  * | ESC   |   1   |   2   |   3   |   4   |   5  |                                    |   6   |   7   |   8   |   9   |   0   | trns |
