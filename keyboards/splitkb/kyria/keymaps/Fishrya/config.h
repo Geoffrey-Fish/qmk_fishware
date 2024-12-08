@@ -1,6 +1,6 @@
 #pragma once
 //Hand definition
-#define MASTER_RIGHT
+#define EE_HANDS
 //Unicode stuff
 #define UNICODE_SELECTED_MODES UNICODE_MODE_WINCOMPOSE, UNICODE_MODE_LINUX
 #define UNICODE_CYCLE_PERSIST false

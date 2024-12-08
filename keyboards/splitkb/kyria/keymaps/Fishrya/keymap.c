@@ -11,7 +11,7 @@ char wpm_str[10];
 deferred_token token = INVALID_DEFERRED_TOKEN;
 //Layer Names
 enum layers {
-    _trns = 0,
+    _gay = 0,
     _qwer,
     _nr,
     _fn,
@@ -40,9 +40,8 @@ enum TapDances{
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // @formatter:off
 
-
 //-----------------------------------------------------------------------WRITING--LAYOUTS---------------------------------------------------------------------------------------------------
-/*,-----------------------------------------------.                       TRNS LAYOUT                            ,-----------------------------------------------.
+/*,-----------------------------------------------.                       gay LAYOUT                            ,-----------------------------------------------.
 * |   Q   |   J   |   Ä   |   O   |   U   |   K   |                                                              |   Z   |   C   |   L   |   V   |   X   |   ß   |
 * |-------+-------+-------+-------+-------+-------|                                                              |-------+-------+-------+-------+-------+-------|
 * |   ?   |(NR) H |(ALT)A |(CTRL)E|   I   |   G   |                                                              |   D   |   T   |(CTRL)N|(ALT)R |(NR) S |   !   |
@@ -51,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * `-----------------------+-------+-------+-------+-------+-------|                              |-------+-------+-------+-------+-------+-----------------------'
 *                         |  qwer |  META |  ESC  |C/SHIFT| SPACE |                              | ENTER | SPACE |  BSPC |   DEL |   OPY |
 *                         `---------------------------------------'                              `---------------------------------------'     */
-    [_trns] = LAYOUT(
+    [_gay] = LAYOUT(
     DE_Q,           DE_J,         DE_ADIA,     DE_O,        DE_U,    DE_K,                                                    DE_Z,    DE_C,   DE_L,        DE_V,        DE_X,         KC_MINS,
     DE_QUES,        LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_G,                            DE_D,   DE_T,    CTL_T(DE_N), ALT_T(DE_R), LT(_nr,DE_S), DE_EXLM,
     LT(_fn,KC_TAB), TD(TD_D_C),   DE_Y,        TD(TD_C_S),  DE_ODIA, DE_UDIA, LT(_nav,DE_HASH), KC_ENT, /**/ SHOT,   TD(TD_M_L), DE_B,    DE_P,   DE_M,        DE_W,        LT(_fn,DE_F), KC_RSFT,
@@ -101,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, RGB_RMOD, XXXXXXX,                                           KC_MUTE, KC_F4,   KC_F5,  KC_F6, KC_F11, FLIP,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       LOGIN  , P_LOREM, KC_VOLD, KC_F1,   KC_F2,  KC_F3, KC_F12, LENNYF,
                                XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),
-  /*,-------------------------------------------.                      NAVI LAYER                  ,-------------------------------------------.
+  /*,-------------------------------------------.                      NAV LAYER                  ,-------------------------------------------.
   * |        |      |      |      |      |      |                                                  |  LB  | home |   up | pgup |      |        |
   * |--------+------+------+------+------+------|                                                  |------+------+------+------+------+--------|
   * |        |      |      |      |      |      |                                                  |  MB  |   <- |lock  |  ->  |INSERT| PRINT  |
@@ -157,7 +156,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case P_LOREM:
             if (record->event.pressed) {
                 SEND_STRING(
-                        "Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro.\n De carne lumbering animata corpora quaeritis.\n");
+                "Yombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro.\n De carne lumbering animata corpora quaeritis.\nSummus brains sit​​, morbo vel maleficia?\n De apocalzpsi gorger omero undead survivor dictum mauris.\n Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium.\n Qui animated corpse, cricket bat max brucks terribilem incessu yombz.\n The voodoo sacerdos flesh eater, suscitat mortuos comedere carnem virus.\nYombi tattered for solum oculi eorum defunctis go lum cerebro.\n Nescio brains an Undead Yombies.\n Sicut malus putrid VOODOO horror.\n Nigh tofth eliv ingdead.");
                 return false;
             }
         case LENNYF:  // ( ͡° ͜ʖ ͡°)
@@ -215,42 +214,41 @@ void matrix_scan_user(void) {
 }
 bool encoder_update_user(uint8_t index, bool clockwise) {
     switch (get_highest_layer(layer_state)) {
-        case _trns:
+        case _gay:
         case _qwer:
-            if (index == 1) {
-                if (clockwise) {
-                    tap_code(KC_RIGHT);
-                } else {
-                    tap_code(KC_LEFT);
-                }
-            } else if (index == 0) { // Encoder on(slave) side
+            if (index == 0) { // Encoder on(slave) side
                 if (clockwise) {
                     tap_code(KC_DOWN);
                 } else {
                     tap_code(KC_UP);
                 }
+            } else if (index == 1) {
+                if (clockwise) {
+                    tap_code(KC_RIGHT);
+                } else {
+                    tap_code(KC_LEFT);
+                }
             }
             break;
         case _nr:
-            if (index == 1) {
-                if (clockwise) {
-                    tap_code(KC_MPRV);
-                } else {
-                    tap_code(KC_MNXT);
-                }
-            } else if (index == 0) { // Encoder on(slave) side
+            if (index == 0) { // Encoder on(slave) side
                 if (clockwise) {
                     tap_code(KC_VOLU);
                 } else {
                     tap_code(KC_VOLD);
                 }
+            }else if (index == 1) {
+                if (clockwise) {
+                    tap_code(KC_MPRV);
+                } else {
+                    tap_code(KC_MNXT);
+                }
             }
             break;
-        case _nav:
         case _fn:
             // Switch between windows on Windows with alt tab.
             if (index == 0) {
-                if (clockwise) {
+              if (clockwise) {
                     if (!is_alt_tab_active) {
                         is_alt_tab_active = true;
                         register_code(KC_LALT);
@@ -274,16 +272,16 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 static void masterOled(void) {
     oled_clear();
     oled_set_cursor(0, 0);
-    oled_write_P(PSTR("Fishrya      V:1.6.2"),false);
+oled_write_P(PSTR("Fishrya      V:1.6.9"),false);
     oled_set_cursor(0, 1);
     oled_write("Code and Design by: ",false);
     oled_set_cursor(0, 2);
     oled_write("Scy Marshall Ltd.",false);
     oled_set_cursor(0,3);
-    oled_write("Currently active: ",false);
+    oled_write("Current Mode: ",false);
     switch (get_highest_layer(layer_state)) {
-        case _trns:
-            oled_write_P(PSTR("TRNS"), false);
+        case _gay:
+            oled_write_P(PSTR("gay"), false);
             break;
         case _qwer:
             oled_write_P(PSTR("Game"), false);
@@ -305,12 +303,13 @@ static void masterOled(void) {
     oled_write_ln_P(led_state.caps_lock   ? PSTR("CAPSLOCK ") : PSTR(""), false);
     oled_set_cursor(0,5);
     oled_write("Words per Minute: ", false);
+    oled_set_cursor(50,6);
     oled_write(get_u8_str(get_current_wpm(), ' '), false);
 }
 
 static void slaveOled(void) {
     switch (get_highest_layer(layer_state)) {
-    case _trns:
+    case _gay:
     oled_write_raw_P(Gay64,sizeof(Gay64));
         break;
     case _qwer:
@@ -355,52 +354,8 @@ bool oled_task_user(void) {
     KC_ESC,  DE_V, DE_DOT, DE_O,    DE_U,    DE_ADIA,                                               DE_Q,   DE_G,   DE_L, DE_H, DE_F, DE_J,
     KC_TAB,  DE_C, DE_A,   DE_E,    DE_I,    DE_Y,                                                  DE_B,   DE_T,   DE_R, DE_N, DE_S, LT(_nr,KC_MINS),
     KC_LSFT, DE_Z, DE_X,   DE_COMM, DE_ODIA, DE_UDIA, MO(_nr), XXXXXXX,     TG(_qwer), MO(_fn), DE_P,   DE_D,   DE_W, DE_M, DE_K, KC_RSFT,
-                           KC_TRNS, KC_LALT, KC_LGUI, KC_LCTL,   KC_SPC,    KC_ENT,    KC_BSPC, KC_DEL, MO(_fn),TG(_gay)), */
-/*,-----------------------------------------------.                          OPY LAYOUT                          ,-----------------------------------------------.
-* | (NAV) |   Q   |   Z   |   O   |   P   |   Y   |                                                              |   W   |   C   |   M   |   V   |   X   | (gay) |
-* |-------+-------+-------+-------+-------+-------|                                                              |-------+-------+-------+-------+-------+-------|
-* |  , ;  |(NR) H |(ALT)A |(CTRL)E|   I   |   U   |                                                              |   D   |   T   |(CTRL)N|(ALT)S |(NR) R |  . :  |
-* |-------+-------+-------+-------+-------+-------+-------+-------.                              ,-------+-------+-------+-------+-------+-------+-------+-------|
-* |   !   |(FN)J  |   Ö   |   Ä   |   K   |   Ü   |  COPY | PASTE |                              | SHOT  |  TAB  |   B   |   G   |   L   |  ß $  |(FN) F |   ?   |
-* `-----------------------+-------+-------+-------+-------+-------|                              |-------+-------+-------+-------+-------+-----------------------'
-*                         |  vou  |  META |  ESC  |C/SHIFT|   TAB |                              |  ENTER| SPACE |  BSPC |   DEL |   GAY |
-*                         `---------------------------------------'                              `---------------------------------------'*/
- /*   [_opy] = LAYOUT(
-    MO(_nav),   DE_Q,         DE_Z,        DE_O,        DE_P,    DE_Y,                                            DE_W,    DE_C,   DE_M,        DE_V,        DE_X,         XXXXXXX,
-    TD(TD_C_S), LT(_nr,DE_H), ALT_T(DE_A), CTL_T(DE_E), DE_I,    DE_U,                                            DE_D,    DE_T,   CTL_T(DE_N), ALT_T(DE_S), LT(_nr,DE_R), TD(TD_D_C),
-    DE_EXLM,    LT(_fn,DE_J), DE_ODIA,     DE_ADIA,     DE_K,    DE_UDIA, KC_COPY, KC_PASTE,  SHOT,   KC_TAB, DE_B,    DE_G,   DE_L,        TD(TD_S_D),  LT(_fn,DE_F), DE_QUOT,
-                                           QK_LOCK,     KC_LGUI, KC_ESC,  KC_LSFT, KC_TAB,    KC_ENT, KC_SPC, KC_BSPC, KC_DEL, KC_TRNS),*/
+                           KC_TRNS, KC_LALT, KC_LGUI, KC_LCTL,   KC_SPC,    KC_ENT,    KC_BSPC, KC_DEL, MO(_fn),TG(_gay)),
 
-//-----------------------------------------------------------------------WRITING--LAYOUTS---------------------------------------------------------------------------------------------------
-/*,-----------------------------------------------.                       GAY LAYOUT                             ,-----------------------------------------------.
-* |     Q |   J   |   Z   |   Y   |   .:  |   Ü   |                                                              |   X   |   M   |   D   |   F   |   K   |   ß   |
-* |-------+-------+-------+-------+-------+-------|                                                              |-------+-------+-------+-------+-------+-------|
-* |   !   |(NR) G |(ALT)A |(CTRL)E|   I   |   O   |                                                              |   R   |   N   |(CTRL)S|(ALT)T |(NR) H |   ?   |
-* |-------+-------+-------+-------+-------+-------+-------+-------.                              ,-------+-------+-------+-------+-------+-------+-------+-------|
-* |  TAB  |(FN)C  |   Ä   |   Ö   |   U   |   ,;  | (nav)#| ENTER |                              |  SHOT |   -_  |   W   |   L   |   V   |   B   |(FN) P | SHIFT |
-* `-----------------------+-------+-------+-------+-------+-------|                              |-------+-------+-------+-------+-------+-----------------------'
-*                         |  qwer |  META |  ESC  |C/SHIFT| SPACE |                              | ENTER | SPACE |  BSPC |   DEL |   OPY |
-*                         `---------------------------------------'                              `---------------------------------------'*/
- /*   [_gay] = LAYOUT(
-    DE_Q,    DE_J,         DE_Z,        DE_Y,        TD(TD_D_C), DE_UDIA,                                                       DE_X,    DE_M,   DE_D,        DE_F,        DE_K,         KC_MINS,
-    DE_EXLM, LT(_nr,DE_G), ALT_T(DE_A), CTL_T(DE_E), DE_I,       DE_O,                                                          DE_R,    DE_N,   CTL_T(DE_S), ALT_T(DE_T), LT(_nr,DE_H), DE_QUES,
-    KC_TAB,  LT(_fn,DE_C), DE_ADIA,     DE_ODIA,     DE_U,       TD(TD_C_S), LT(_nav,DE_HASH), KC_ENT,  SHOT,   TD(TD_M_L), DE_W,    DE_L,   DE_V,        DE_B,        LT(_fn,DE_P), KC_RSFT,
-                                        TG(_qwer) ,  KC_LGUI,    KC_ESC,     KC_LSFT, KC_SPC,           KC_ENT, KC_SPC,     KC_BSPC, KC_DEL, TG(_qwer)),  */
-
-  /*
-     case _opy:
-    oled_write_raw_P(opy64,sizeof(opy64));
-        break;
-    case _vou:
-        oled_write_raw_P(vou64,sizeof(vou64));
-        break;
-
-    case _opy:
-        oled_write_P(PSTR("OPY"), false);
-        break;
-    case _vou:
-        oled_write_P(PSTR("vou"), false);
-        break;
+                           */
 
 
-        */
